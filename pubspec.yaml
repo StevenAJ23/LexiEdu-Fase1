@@ -1,7 +1,7 @@
 name: incluapp
 description: Aplicacion de accesibilidad con OCR local y TTS nativo para estudiantes con dislexia y baja vision.
 publish_to: "none"
-version: 1.0.0+1
+version: 2.0.0+2
 
 environment:
   sdk: ">=3.0.0 <4.0.0"

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'core/theme/app_theme.dart';
-import 'presentation/screens/camera_screen.dart';
+import 'presentation/screens/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,32 +16,31 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const IncluApp());
+  runApp(const LexiEduApp());
 }
 
-class IncluApp extends StatelessWidget {
-  const IncluApp({super.key});
+class LexiEduApp extends StatelessWidget {
+  const LexiEduApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'IncluApp',
+      title: 'LexiEdu',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       builder: (context, child) {
         final mediaQuery = MediaQuery.of(context);
-
         return MediaQuery(
           data: mediaQuery.copyWith(
             textScaler: mediaQuery.textScaler.clamp(
-              minScaleFactor: 1.15,
+              minScaleFactor: 1.0,
               maxScaleFactor: 1.55,
             ),
           ),
           child: child ?? const SizedBox.shrink(),
         );
       },
-      home: const CameraScreen(),
+      home: const SplashScreen(),
     );
   }
 }

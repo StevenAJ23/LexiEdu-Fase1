@@ -25,6 +25,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
   final TtsService _ttsService = TtsService();
   double _speechRate = 0.45;
   bool _isSpeaking = false;
+  double _fontSize = 22;
 
   bool get _hasText => widget.extractedText.trim().isNotEmpty;
 
@@ -129,6 +130,20 @@ class _ReaderScreenState extends State<ReaderScreen> {
       appBar: AppBar(
         title: const Text('Lectura'),
         actions: [
+          IconButton(
+            onPressed: () => setState(() {
+              _fontSize = (_fontSize - 2).clamp(14, 36);
+            }),
+            icon: const Icon(Icons.text_decrease_rounded),
+            tooltip: 'Reducir texto',
+          ),
+          IconButton(
+            onPressed: () => setState(() {
+              _fontSize = (_fontSize + 2).clamp(14, 36);
+            }),
+            icon: const Icon(Icons.text_increase_rounded),
+            tooltip: 'Agrandar texto',
+          ),
           if (_hasText)
             IconButton(
               onPressed: _copyText,
@@ -165,7 +180,9 @@ class _ReaderScreenState extends State<ReaderScreen> {
                     child: _hasText
                         ? SelectableText(
                             widget.extractedText,
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  fontSize: _fontSize,
+                                ),
                           )
                         : Text(
                             'No se detectó texto en la imagen.',

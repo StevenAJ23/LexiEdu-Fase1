@@ -9,6 +9,7 @@ import '../../core/utils/app_snackbar.dart';
 import '../../data/services/ocr_service.dart';
 import '../widgets/feature_card.dart';
 import 'help_screen.dart';
+import 'history_screen.dart';
 import 'reader_screen.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -201,6 +202,13 @@ class _CameraScreenState extends State<CameraScreen> {
       appBar: AppBar(
         title: const Text('LexiEdu'),
         actions: [
+          IconButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const HistoryScreen()),
+            ),
+            icon: const Icon(Icons.history_rounded),
+            tooltip: 'Historial',
+          ),
           IconButton(
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(builder: (_) => const HelpScreen()),
