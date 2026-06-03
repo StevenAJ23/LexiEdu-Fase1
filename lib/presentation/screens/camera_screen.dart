@@ -226,7 +226,7 @@ class _CameraScreenState extends State<CameraScreen> {
                     duration: const Duration(milliseconds: 300),
                     child: _isProcessing
                         ? const _ProcessingState()
-                        : const _ReadyState(),
+                        : _ReadyState(onTap: _captureFromCamera),
                   ),
                 ),
               ),
@@ -238,8 +238,6 @@ class _CameraScreenState extends State<CameraScreen> {
                 ),
                 const SizedBox(height: 16),
               ],
-              const _PuceBadge(),
-              const SizedBox(height: 12),
               const _ButtonDivider(),
               const SizedBox(height: 12),
               ElevatedButton.icon(
@@ -253,6 +251,8 @@ class _CameraScreenState extends State<CameraScreen> {
                 icon: const Icon(Icons.image_search, size: 32, semanticLabel: ''),
                 label: const Text('Elegir imagen'),
               ),
+              const SizedBox(height: 20),
+              const _PuceBadge(),
             ],
           ),
         ),
@@ -378,38 +378,47 @@ class _PuceBadge extends StatelessWidget {
 // ── Estado: listo ─────────────────────────────────────────────────────────────
 
 class _ReadyState extends StatelessWidget {
-  const _ReadyState();
+  const _ReadyState({required this.onTap});
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Listo para capturar texto. Elige una imagen para comenzar.',
-      excludeSemantics: true,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 68,
-            height: 68,
-            decoration: BoxDecoration(
-              color: AppTheme.surface,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: AppTheme.primaryYellow.withValues(alpha: 0.50),
-                width: 2,
+      label: 'Abrir cámara para capturar texto',
+      button: true,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                color: AppTheme.primaryYellow.withValues(alpha: 0.10),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppTheme.primaryYellow.withValues(alpha: 0.70),
+                  width: 2.5,
+                ),
+              ),
+              child: const Icon(
+                Icons.photo_camera_outlined,
+                size: 40,
+                color: AppTheme.primaryYellow,
               ),
             ),
-            child: const Icon(Icons.add_photo_alternate_outlined, size: 36),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'Elige una imagen para comenzar',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppTheme.disabledGray,
-                ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+            const SizedBox(height: 12),
+            Text(
+              'Toca para abrir la cámara',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppTheme.disabledGray,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
