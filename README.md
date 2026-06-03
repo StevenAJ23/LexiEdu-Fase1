@@ -7,7 +7,7 @@
 
 # LexiEdu
 
-### Convierte texto impreso en voz — sin internet, sin servidores, sin costo
+### Convierte texto impreso en voz — sin internet, sin servidores
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
@@ -30,7 +30,7 @@
 
 **LexiEdu** es una aplicación móvil Flutter diseñada para reducir las barreras de acceso al contenido escrito. Apunta la cámara a cualquier texto impreso — un libro, una pizarra, un apunte — y la app lo convierte en audio al instante.
 
-Todo el procesamiento ocurre **dentro del dispositivo**. Sin internet, sin nube, sin costo operativo.
+Todo el procesamiento ocurre **dentro del dispositivo**. Sin internet, sin nube.
 
 ```
 📸 Fotografía el texto  →  🔍 OCR analiza la imagen  →  🔊 Texto se lee en voz alta
@@ -169,8 +169,7 @@ CameraScreen → OcrService (ML Kit) → ReaderScreen → TtsService (TTS nativo
 | `permission_handler` | ^11.3.1 | Permisos en tiempo de ejecución |
 | `path_provider` | ^2.1.3 | Rutas del sistema de archivos |
 
-> LexiEdu **no usa** Firebase, AWS, APIs de pago ni ningún servicio externo.  
-> Costo operativo: **USD 0**
+> LexiEdu **no usa** Firebase, AWS, APIs de pago ni ningún servicio externo.
 
 ---
 
@@ -200,7 +199,6 @@ CameraScreen → OcrService (ML Kit) → ReaderScreen → TtsService (TTS nativo
 | Estado | PMV funcional — APK probada en dispositivo Android |
 | Plataforma principal | Android |
 | Plataformas secundarias | iOS · Web (visualización de UI) |
-| Costo operativo | **USD 0** |
 | Privacidad | Sin servidores · Sin tracking · 100% local |
 
 ### Roadmap
