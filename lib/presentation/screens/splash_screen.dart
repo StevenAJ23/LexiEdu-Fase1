@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../core/theme/app_theme.dart';
@@ -16,6 +18,7 @@ class _SplashScreenState extends State<SplashScreen>
   late final Animation<double> _fade;
   late final Animation<Offset> _slide;
   late final Animation<double> _logoPulse;
+  Timer? _navTimer;
 
   @override
   void initState() {
@@ -39,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _ctrl.forward();
 
-    Future.delayed(const Duration(milliseconds: 2800), _navigate);
+    _navTimer = Timer(const Duration(milliseconds: 2800), _navigate);
   }
 
   void _navigate() {
@@ -56,6 +59,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void dispose() {
+    _navTimer?.cancel();
     _ctrl.dispose();
     super.dispose();
   }
