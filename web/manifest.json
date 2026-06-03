@@ -1,11 +1,11 @@
 {
-    "name": "incluapp",
-    "short_name": "incluapp",
+    "name": "LexiEdu",
+    "short_name": "LexiEdu",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#000000",
+    "theme_color": "#FFD400",
+    "description": "Convierte texto impreso en voz. OCR local sin internet.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

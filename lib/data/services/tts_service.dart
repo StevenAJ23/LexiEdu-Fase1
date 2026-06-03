@@ -47,12 +47,12 @@ class TtsService {
 
       _flutterTts.setErrorHandler((message) {
         _isPlaying = false;
-        log('Error de TTS: $message', name: 'IncluApp.TtsService');
+        log('Error de TTS: $message', name: 'LexiEdu.TtsService');
       });
     } catch (error, stackTrace) {
       log(
         'No se pudo inicializar el motor TTS nativo.',
-        name: 'IncluApp.TtsService',
+        name: 'LexiEdu.TtsService',
         error: error,
         stackTrace: stackTrace,
       );
@@ -73,7 +73,7 @@ class TtsService {
     } catch (error, stackTrace) {
       log(
         'No se pudo reproducir el texto.',
-        name: 'IncluApp.TtsService',
+        name: 'LexiEdu.TtsService',
         error: error,
         stackTrace: stackTrace,
       );
