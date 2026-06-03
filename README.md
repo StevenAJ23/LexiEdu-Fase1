@@ -1,300 +1,243 @@
-# IncluApp
+<div align="center">
 
-Aplicación móvil de accesibilidad educativa con reconocimiento óptico de caracteres (OCR) local y síntesis de voz (TTS) nativa, desarrollada con Flutter y Dart.
+<img src="assets/images/puce_logo.png" alt="PUCE" height="60"/>
 
-**Repositorio público:** https://github.com/StevenAJ23/IncluApp
+<br/>
+<br/>
 
----
+# LexiEdu
 
-## 1. Descripción general
+### Convierte texto impreso en voz — sin internet, sin servidores, sin costo
 
-**IncluApp** es un Producto Mínimo Viable (PMV) de accesibilidad orientado a estudiantes con dislexia o baja visión. El caso de estudio se contextualiza en el Colegio Fe y Alegría, institución educativa que atiende a poblaciones con necesidades especiales de aprendizaje.
+[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
+[![Android](https://img.shields.io/badge/Android-Compatible-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com)
+[![License](https://img.shields.io/badge/Licencia-MIT-yellow?style=for-the-badge)](LICENSE)
+[![Release](https://img.shields.io/badge/Release-v1.0.0-FFD400?style=for-the-badge)](https://github.com/StevenAJ23/LexiEdu/releases/tag/v1.0.0)
 
-La aplicación permite fotografiar texto impreso, como libros, pizarras, hojas de trabajo o apuntes, y escucharlo en voz alta de manera inmediata. Todo el procesamiento ocurre en el propio dispositivo: no se transmite información a servidores externos, no se requiere conexión a internet durante el uso principal y el costo operativo del PMV es **USD 0**.
+<br/>
 
-IncluApp prioriza la accesibilidad mediante una interfaz de alto contraste, botones grandes, tipografía legible, mensajes visuales claros y lectura por voz del texto reconocido.
+> Herramienta de accesibilidad educativa para estudiantes con **dislexia o baja visión**.  
+> OCR local · Síntesis de voz · Alto contraste · 100% offline
 
----
+**[Descargar APK](https://github.com/StevenAJ23/LexiEdu/releases/tag/v1.0.0)** · **[Ver capturas](docs/Capturas.md)** · **[Reportar un problema](https://github.com/StevenAJ23/LexiEdu/issues)**
 
-## 2. Objetivo de la aplicación
-
-Reducir la barrera de acceso al contenido escrito para estudiantes con dislexia o baja visión mediante una herramienta móvil que:
-
-- Extrae texto de imágenes usando OCR local con Google ML Kit.
-- Lee el texto extraído en voz alta con el motor de síntesis de voz nativo del dispositivo.
-- Ofrece una interfaz accesible con alto contraste, tipografía clara y controles táctiles amplios.
-- Permite capturar texto desde cámara o galería.
-- Guarda un historial local de lecturas mediante Hive.
-- Protege la privacidad del contenido académico al no requerir backend ni servicios externos.
+</div>
 
 ---
 
-## 3. Stack tecnológico
+## ¿Qué es LexiEdu?
 
-| Tecnología | Versión / referencia | Rol en el proyecto |
-|---|---|---|
-| Flutter | >= 3.0 | Framework de interfaz multiplataforma para Android, iOS y Web |
-| Dart | >= 3.0.0 < 4.0.0 | Lenguaje principal de programación |
-| google_mlkit_text_recognition | ^0.13.0 | OCR local para extracción de texto sin conexión |
-| flutter_tts | ^4.0.2 | Síntesis de voz nativa del dispositivo |
-| hive | ^2.2.3 | Base de datos local para historial de lecturas |
-| hive_flutter | ^1.1.0 | Integración de Hive con Flutter |
-| image_picker | ^1.1.2 | Selección de imágenes desde cámara o galería |
-| camera | ^0.11.0+2 | Acceso directo a la cámara del dispositivo |
-| permission_handler | ^11.3.1 | Gestión de permisos en tiempo de ejecución |
-| path_provider | ^2.1.3 | Acceso a rutas del sistema de archivos local |
+**LexiEdu** es una aplicación móvil Flutter diseñada para reducir las barreras de acceso al contenido escrito. Apunta la cámara a cualquier texto impreso — un libro, una pizarra, un apunte — y la app lo convierte en audio al instante.
 
-**Nota:** IncluApp no utiliza backend, Firebase, AWS, Azure, APIs de pago ni servicios externos. El diseño sigue el principio de procesamiento local, ya que el OCR, el TTS y el historial se ejecutan en el dispositivo.
+Todo el procesamiento ocurre **dentro del dispositivo**. Sin internet, sin nube, sin costo operativo.
 
----
-
-## 4. Estructura del proyecto
-
-El proyecto **IncluApp** está organizado siguiendo una estructura por capas propia de una aplicación Flutter. Esta organización permite separar la interfaz, los servicios, la configuración visual y la documentación del proyecto.
-
-```text
-IncluApp/
-├── android/                    # Configuración nativa para Android
-├── ios/                        # Configuración nativa para iOS
-├── web/                        # Soporte para ejecución web de la interfaz
-├── lib/
-│   ├── core/
-│   │   ├── theme/              # Tema visual, colores, tipografía y estilos globales
-│   │   └── utils/              # Utilidades compartidas, mensajes y helpers
-│   ├── data/
-│   │   └── services/           # Servicios de OCR, TTS y lógica relacionada
-│   ├── presentation/
-│   │   ├── screens/            # Pantallas principales de la aplicación
-│   │   └── widgets/            # Componentes reutilizables de interfaz
-│   └── main.dart               # Punto de entrada de la aplicación
-├── docs/
-│   ├── Sprint_Backlog.md       # Planificación de sprints e historias de usuario
-│   ├── Cronograma.md           # Cronograma de trabajo del proyecto
-│   ├── Definition_of_Done.md   # Criterios para considerar una función terminada
-│   ├── Capturas.md             # Evidencias visuales de funcionamiento
-│   └── capturas/               # Imágenes de evidencia de la app
-├── tests/
-│   └── Pruebas_Funcionales.md  # Registro de pruebas funcionales manuales
-├── README.md                   # Documentación principal del proyecto
-├── .env.example                # Plantilla de variables de entorno sin datos reales
-├── pubspec.yaml                # Dependencias y configuración Flutter
-└── pubspec.lock                # Versiones exactas de dependencias instaladas
+```
+📸 Fotografía el texto  →  🔍 OCR analiza la imagen  →  🔊 Texto se lee en voz alta
 ```
 
-### Descripción de carpetas principales
+---
 
-| Carpeta | Descripción |
-|---|---|
-| `android/` | Contiene la configuración nativa necesaria para compilar e instalar la aplicación en dispositivos Android. |
-| `ios/` | Contiene la configuración nativa para una posible ejecución en dispositivos iOS. |
-| `web/` | Permite ejecutar la interfaz de la aplicación en navegador mediante Flutter Web. |
-| `lib/` | Contiene el código fuente principal de la aplicación Flutter. |
-| `lib/core/theme/` | Define la apariencia visual de la aplicación, como colores, estilos, botones y tipografía accesible. |
-| `lib/core/utils/` | Contiene utilidades compartidas, como mensajes visuales o funciones auxiliares usadas en varias pantallas. |
-| `lib/data/services/` | Agrupa los servicios principales de la aplicación, como reconocimiento OCR y lectura por voz. |
-| `lib/presentation/screens/` | Contiene las pantallas de la aplicación, por ejemplo la pantalla principal, ayuda, captura y lectura. |
-| `lib/presentation/widgets/` | Contiene widgets reutilizables para mantener el código más ordenado. |
-| `docs/` | Contiene la documentación del proyecto, evidencias, cronograma, backlog y Definition of Done. |
-| `docs/capturas/` | Guarda las capturas de pantalla que evidencian el funcionamiento de la aplicación. |
-| `tests/` | Contiene la documentación de pruebas funcionales manuales realizadas al MVP. |
+## Características
 
-**Nota:** En proyectos Flutter, la carpeta `lib/` cumple la función equivalente a `src/` en otros tipos de proyectos, ya que contiene el código fuente principal de la aplicación.
+| | Función | Detalle |
+|---|---|---|
+| 📷 | **Cámara y galería** | Capturá texto desde la cámara o elegí una imagen existente |
+| 🔍 | **OCR local** | Google ML Kit — sin enviar datos a ningún servidor |
+| 🔊 | **Síntesis de voz** | Motor TTS nativo de Android/iOS en español |
+| ⚡ | **4 velocidades** | Muy lenta · Lenta · Normal · Rápida |
+| 📋 | **Copiar texto** | Copiá el texto detectado al portapapeles con un toque |
+| 📊 | **Estadísticas** | Contador de palabras y tiempo de procesamiento |
+| 💾 | **Historial local** | Lecturas guardadas en Hive (NoSQL en el dispositivo) |
+| 🌙 | **Alto contraste** | Negro / Amarillo — cumple estándar WCAG AA |
+| 🔒 | **Privacidad total** | Ningún dato sale del dispositivo |
+| 📴 | **Sin internet** | Funciona completamente offline |
 
 ---
 
-## 5. Instalación
+## Capturas de pantalla
+
+<div align="center">
+
+| Pantalla principal | Resultado OCR | Ayuda |
+|---|---|---|
+| <img src="docs/capturas/pantalla_principal.jpeg" width="220"/> | <img src="docs/capturas/resultado_ocr_lectura.jpeg" width="220"/> | <img src="docs/capturas/ayuda_descripcion.jpeg" width="220"/> |
+
+| Cámara | APK instalada |
+|---|---|
+| <img src="docs/capturas/captura_imagen_camara.jpeg" width="220"/> | <img src="docs/capturas/apk_instalada.jpeg" width="220"/> |
+
+</div>
+
+---
+
+## Instalación rápida (APK)
+
+> La forma más rápida de probar LexiEdu sin necesitar Flutter instalado.
+
+1. Descargá el APK desde [Releases](https://github.com/StevenAJ23/LexiEdu/releases/tag/v1.0.0)
+2. En tu Android: **Ajustes → Seguridad → Instalar desde fuentes desconocidas** (activar)
+3. Abrí el archivo `LexiEdu-v1.0.0.apk` e instalalo
+4. Concedé los permisos de cámara y galería al iniciarlo por primera vez
+
+**Requisitos mínimos:** Android 5.0 (API 21) · ~77 MB de espacio libre
+
+---
+
+## Instalación para desarrolladores
 
 ### Requisitos previos
 
-Para ejecutar el proyecto se requiere:
+- Flutter SDK ≥ 3.0 ([instalar Flutter](https://docs.flutter.dev/get-started/install))
+- Android Studio o VS Code con extensión Flutter
+- Dispositivo Android o emulador
 
-- Flutter SDK instalado y agregado al PATH.
-- Dart incluido con Flutter.
-- Android Studio o Visual Studio Code con la extensión de Flutter.
-- Dispositivo Android físico o emulador.
-- Git instalado.
-
-### Pasos de instalación
+### Clonar y ejecutar
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/StevenAJ23/IncluApp.git
+git clone https://github.com/StevenAJ23/LexiEdu.git
+cd LexiEdu
 
-# 2. Entrar al proyecto
-cd IncluApp
-
-# 3. Instalar dependencias
+# 2. Instalar dependencias
 flutter pub get
 
-# 4. Verificar el entorno
+# 3. Verificar entorno
 flutter doctor
+
+# 4. Ejecutar en dispositivo/emulador
+flutter run
 ```
 
-### Permisos requeridos en Android
+### Generar APK
 
-El archivo `android/app/src/main/AndroidManifest.xml` debe declarar permisos para cámara y acceso a imágenes, según la versión de Android utilizada:
+```bash
+# APK release (recomendado)
+flutter build apk --release
 
+# APK debug (para desarrollo)
+flutter build apk --debug
+```
+
+El APK generado se encuentra en:
+```
+build/app/outputs/flutter-apk/app-release.apk
+```
+
+---
+
+## Arquitectura
+
+```
+lib/
+├── core/
+│   ├── theme/          → AppTheme: colores, tipografía WCAG AA, estilos globales
+│   └── utils/          → AppSnackBar: notificaciones visuales
+├── data/
+│   └── services/
+│       ├── ocr_service.dart   → Google ML Kit Text Recognition (OCR local)
+│       └── tts_service.dart   → Flutter TTS (síntesis de voz nativa)
+├── presentation/
+│   ├── screens/
+│   │   ├── camera_screen.dart  → Pantalla principal (cámara / galería)
+│   │   ├── reader_screen.dart  → Resultados OCR + controles TTS
+│   │   └── help_screen.dart    → Ayuda y sección Acerca de
+│   └── widgets/
+│       └── feature_card.dart   → Tarjeta de funcionalidad reutilizable
+└── main.dart           → Inicialización, Hive, orientación, tema
+```
+
+**Flujo de datos:**
+```
+CameraScreen → OcrService (ML Kit) → ReaderScreen → TtsService (TTS nativo)
+                                          ↓
+                                    Hive (historial local)
+```
+
+---
+
+## Stack tecnológico
+
+| Paquete | Versión | Rol |
+|---|---|---|
+| `flutter` | SDK ≥ 3.0 | Framework UI multiplataforma |
+| `google_mlkit_text_recognition` | ^0.13.0 | OCR local (Google ML Kit) |
+| `flutter_tts` | ^4.0.2 | Síntesis de voz nativa |
+| `hive` + `hive_flutter` | ^2.2.3 | Base de datos local (NoSQL) |
+| `image_picker` | ^1.1.2 | Cámara y galería |
+| `camera` | ^0.11.0+2 | Acceso directo a la cámara |
+| `permission_handler` | ^11.3.1 | Permisos en tiempo de ejecución |
+| `path_provider` | ^2.1.3 | Rutas del sistema de archivos |
+
+> LexiEdu **no usa** Firebase, AWS, APIs de pago ni ningún servicio externo.  
+> Costo operativo: **USD 0**
+
+---
+
+## Permisos requeridos
+
+### Android (`AndroidManifest.xml`)
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
 <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 ```
 
-### Permisos requeridos en iOS
-
-El archivo `ios/Runner/Info.plist` debe incluir descripciones de uso para cámara y galería:
-
+### iOS (`Info.plist`)
 ```xml
 <key>NSCameraUsageDescription</key>
-<string>IncluApp necesita acceso a la cámara para capturar texto.</string>
-
+<string>LexiEdu usa la cámara para capturar texto impreso.</string>
 <key>NSPhotoLibraryUsageDescription</key>
-<string>IncluApp necesita acceso a la galería para seleccionar imágenes con texto.</string>
+<string>LexiEdu permite elegir imágenes de la galería para reconocer texto.</string>
 ```
 
 ---
 
-## 6. Ejecución en Flutter Web
-
-Para ejecutar la interfaz en navegador:
-
-```bash
-flutter run -d chrome
-```
-
-**Limitación importante:** IncluApp está diseñada principalmente para Android. En Flutter Web, las funcionalidades de OCR con Google ML Kit y TTS nativo pueden tener soporte limitado, ya que dependen de APIs nativas del dispositivo. Por ello, la ejecución web se utiliza principalmente para visualizar la interfaz.
-
----
-
-## 7. Generación de APK
-
-Para generar una APK de depuración:
-
-```bash
-flutter build apk --debug
-```
-
-El archivo generado se encuentra en:
-
-```text
-build/app/outputs/flutter-apk/app-debug.apk
-```
-
-Para instalar directamente en un dispositivo Android conectado por USB:
-
-```bash
-flutter install
-```
-
-También puede instalarse manualmente copiando el archivo `app-debug.apk` al celular y habilitando la instalación desde fuentes permitidas.
-
----
-
-## 8. Credenciales de prueba
-
-IncluApp no requiere registro, inicio de sesión ni credenciales de prueba.
-
-| Componente | Estado |
-|---|---|
-| Login / Registro | No aplica |
-| API Keys externas | No aplica |
-| Variables de entorno sensibles | No aplica |
-| Cuenta de prueba | No aplica |
-| Backend | No aplica |
-
-Todo el funcionamiento es local. El OCR, el TTS y el historial se ejecutan directamente en el dispositivo, por lo que no se necesitan credenciales para instalar ni utilizar la aplicación.
-
----
-
-## 9. Documentación del proyecto
-
-| Documento | Ubicación | Contenido |
-|---|---|---|
-| Sprint Backlog | `docs/Sprint_Backlog.md` | Historias de usuario, tareas, responsables, fechas y estado por sprint. |
-| Cronograma | `docs/Cronograma.md` | Planificación temporal del proyecto desde la semana 7 hasta la semana 11. |
-| Definition of Done | `docs/Definition_of_Done.md` | Criterios para considerar una funcionalidad terminada. |
-| Capturas de pantalla | `docs/Capturas.md` | Evidencias visuales de la aplicación funcionando. |
-| Pruebas funcionales | `tests/Pruebas_Funcionales.md` | Casos de prueba manuales con resultado esperado y resultado real. |
-
-La evidencia principal de funcionamiento se encuentra en:
-
-```text
-docs/Capturas.md
-```
-
----
-
-## 10. Estado del proyecto
+## Estado del proyecto
 
 | Atributo | Detalle |
 |---|---|
-| Versión actual | 1.0.0+1 |
-| Estado | PMV funcional |
+| Versión | **1.0.0** |
+| Estado | PMV funcional — APK probada en dispositivo Android |
 | Plataforma principal | Android |
-| Plataforma secundaria | iOS / Web para visualización de interfaz |
-| Costo operativo | USD 0 |
-| Tipo de pruebas | Pruebas funcionales manuales |
-| Evidencia de funcionamiento | APK instalada y capturas documentadas |
+| Plataformas secundarias | iOS · Web (visualización de UI) |
+| Costo operativo | **USD 0** |
+| Privacidad | Sin servidores · Sin tracking · 100% local |
 
-### Funcionalidades implementadas
+### Roadmap
 
-- Captura de imagen desde cámara.
-- Selección de imagen desde galería.
-- Extracción de texto mediante OCR local con Google ML Kit.
-- Lectura en voz alta con Flutter TTS.
-- Controles de lectura.
-- Velocidad de voz ajustable.
-- Historial local de lecturas con Hive.
-- Pantalla de ayuda y guía de uso.
-- Mensajes visuales de carga, éxito y error.
-- Diseño accesible con alto contraste, botones grandes y tipografía legible.
-- APK generada e instalada en dispositivo Android.
-- Evidencias visuales registradas en `docs/Capturas.md`.
-
-### Funcionalidades pendientes
-
-- Exportar el texto extraído como archivo de texto.
-- Agregar soporte multiidioma.
-- Mejorar el historial con búsqueda y filtrado.
-- Optimizar la experiencia de lectura para más tipos de documentos.
-- Preparar una versión release firmada para distribución externa.
+- [x] OCR local con Google ML Kit
+- [x] Síntesis de voz TTS en español
+- [x] 4 velocidades de lectura
+- [x] Copiar texto al portapapeles
+- [x] Contador de palabras y tiempo de procesamiento
+- [x] Historial local con Hive
+- [x] Diseño accesible WCAG AA
+- [x] Logo PUCE integrado
+- [ ] Exportar texto como archivo `.txt`
+- [ ] Soporte multiidioma
+- [ ] Historial con búsqueda y filtrado
+- [ ] Firma para distribución en Play Store
 
 ---
 
-## 11. Autores e integrantes
+## Equipo
 
-| Nombre | Rol Scrum | Responsabilidad técnica |
+| Nombre | Rol Scrum | Área técnica |
 |---|---|---|
-| Juan C. Cevallos | Scrum Master / Developer | Organización del backlog, documentación, estructura del proyecto, seguimiento y entrega. |
-| Kevin Daniel Cepeda Lema | Product Owner | Validación de funcionalidades, necesidades del usuario, priorización y criterios de aceptación. |
-| Steven Ariel Rosero | Developer | Captura de imagen, permisos, OCR local y procesamiento de texto. |
-| Victoria Yulieth Galarza Taco | QA / Developer | Pruebas funcionales, accesibilidad, revisión de errores y evidencias. |
-
-Proyecto desarrollado como parte de una entrega académica.
-
-**Institución:** Pontificia Universidad Católica del Ecuador  
-**Carrera:** Ingeniería en Sistemas  
-**Materia:** Emprendimiento Tecnológico  
-**Proyecto:** IncluApp — PMV de accesibilidad educativa  
+| **Juan C. Cevallos** | Scrum Master / Dev | Arquitectura, documentación, backlog |
+| **Kevin Daniel Cepeda Lema** | Product Owner | Validación, requisitos, criterios de aceptación |
+| **Steven Ariel Rosero** | Developer | OCR, permisos, captura de imagen |
+| **Victoria Yulieth Galarza Taco** | QA / Developer | Pruebas funcionales, accesibilidad, evidencias |
 
 ---
 
-## Definition of Done resumida
+<div align="center">
 
-Una funcionalidad de IncluApp se considera terminada cuando cumple con los siguientes criterios:
+Desarrollado como proyecto académico en la
 
-- Está implementada en el código fuente.
-- Funciona en ejecución local sin errores críticos.
-- Presenta una interfaz accesible y comprensible para el usuario.
-- Fue probada manualmente.
-- El cambio fue subido al repositorio GitHub con un commit descriptivo.
-- La documentación fue actualizada si corresponde.
-- Existe evidencia mediante captura de pantalla o prueba funcional.
-- Cumple con el objetivo del MVP: convertir texto impreso en audio.
+<img src="assets/images/puce_logo.png" alt="PUCE" height="40"/>
 
----
+**Pontificia Universidad Católica del Ecuador**  
+Carrera de Ingeniería en Sistemas · Emprendimiento Tecnológico · 2026
 
-## Observaciones finales
-
-IncluApp es una solución móvil enfocada en accesibilidad educativa. Su principal valor está en permitir que estudiantes con dislexia o baja visión puedan convertir texto impreso en audio de forma rápida, privada y sin depender de servicios externos.
-
-Al tratarse de una aplicación móvil Flutter, la evidencia principal de funcionamiento se presenta mediante APK instalada en Android y capturas documentadas en `docs/Capturas.md`. Flutter Web se utiliza únicamente como apoyo para visualizar la interfaz, pero no reemplaza la prueba en dispositivo móvil.
+</div>
