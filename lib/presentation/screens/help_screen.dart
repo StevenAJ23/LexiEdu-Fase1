@@ -14,10 +14,10 @@ class HelpScreen extends StatelessWidget {
         children: [
           _HelpCard(
             icon: Icons.info_outline_rounded,
-            title: '¿Qué es IncluApp?',
+            title: '¿Qué es LexiEdu?',
             children: const [
               _BodyText(
-                'IncluApp es una herramienta de accesibilidad para personas con '
+                'LexiEdu es una herramienta de accesibilidad para personas con '
                 'dislexia o baja visión. Convierte cualquier texto en imágenes a '
                 'voz de forma 100% local, sin internet ni servidores externos. '
                 'Todo el procesamiento ocurre en tu dispositivo.',
@@ -72,6 +72,11 @@ class HelpScreen extends StatelessWidget {
                 detail: 'Controla la velocidad de lectura desde la pantalla de resultados.',
               ),
               _FeatureItem(
+                icon: Icons.copy_outlined,
+                label: 'Copiar texto',
+                detail: 'Copia el texto detectado al portapapeles con un solo toque.',
+              ),
+              _FeatureItem(
                 icon: Icons.lock_outline_rounded,
                 label: 'Privacidad total',
                 detail: 'Ningún dato se envía fuera del dispositivo.',
@@ -90,7 +95,70 @@ class HelpScreen extends StatelessWidget {
               _TipItem('Para textos largos, reduce la velocidad de lectura para seguirla con más facilidad.'),
             ],
           ),
+          const SizedBox(height: 16),
+          const _AboutCard(),
           const SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Tarjeta Acerca de ─────────────────────────────────────────────────────────
+
+class _AboutCard extends StatelessWidget {
+  const _AboutCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppTheme.surface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: AppTheme.primaryYellow.withValues(alpha: 0.22),
+          width: 1.5,
+        ),
+      ),
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          ExcludeSemantics(
+            child: Image.asset(
+              'assets/images/puce_logo.png',
+              height: 48,
+              fit: BoxFit.contain,
+              color: AppTheme.accentWhite,
+              colorBlendMode: BlendMode.modulate,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'LexiEdu v1.0.0',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: AppTheme.primaryYellow,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Proyecto desarrollado en la\nPontificia Universidad Católica del Ecuador',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppTheme.disabledGray,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+          const Divider(),
+          const SizedBox(height: 12),
+          Text(
+            'Carrera de Ingeniería en Sistemas\nEmprendimiento Tecnológico · 2026',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppTheme.disabledGray,
+                  fontSize: 16,
+                ),
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );
@@ -128,7 +196,6 @@ class _HelpCard extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
             child: Row(
               children: [
-                // Icono decorativo: el título ya describe la sección.
                 ExcludeSemantics(
                   child: Icon(icon, color: AppTheme.primaryYellow, size: 26),
                 ),
@@ -180,7 +247,6 @@ class _StepItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // El número del paso se anuncia como "Paso N" en lugar de solo el dígito.
           Semantics(
             label: 'Paso $step',
             excludeSemantics: true,
@@ -236,7 +302,6 @@ class _FeatureItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Icono decorativo: el label de texto ya nombra la función.
           ExcludeSemantics(
             child: Padding(
               padding: const EdgeInsets.only(top: 2),
@@ -282,7 +347,6 @@ class _TipItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Bullet decorativo: no aporta información al lector de pantalla.
           ExcludeSemantics(
             child: const Padding(
               padding: EdgeInsets.only(top: 9),

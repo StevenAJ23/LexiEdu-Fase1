@@ -60,7 +60,6 @@ class _CameraScreenState extends State<CameraScreen> {
 
     final stopwatch = Stopwatch()..start();
 
-    // ── OCR con manejo de error ───────────────────────────────────────────────
     String extractedText;
     try {
       extractedText = await _ocrService.extractTextFromImage(image.path);
@@ -81,7 +80,6 @@ class _CameraScreenState extends State<CameraScreen> {
     stopwatch.stop();
     if (!mounted) return;
 
-    // ── Sin texto detectado ───────────────────────────────────────────────────
     if (extractedText.trim().isEmpty) {
       setState(() {
         _isProcessing = false;
@@ -94,7 +92,6 @@ class _CameraScreenState extends State<CameraScreen> {
       return;
     }
 
-    // ── Guardar en historial (fallo silencioso: no bloquea al usuario) ────────
     await _saveReading(
       text: extractedText,
       imagePath: image.path,
@@ -120,8 +117,6 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 
-  // ── Permisos ──────────────────────────────────────────────────────────────
-
   Future<bool> _ensurePermission(ImageSource source) async {
     if (source != ImageSource.camera) return true;
 
@@ -132,7 +127,6 @@ class _CameraScreenState extends State<CameraScreen> {
     if (!mounted) return false;
 
     if (status.isPermanentlyDenied) {
-      // El usuario bloqueó el permiso permanentemente: necesita ir a ajustes.
       _showPermissionDialog();
     } else {
       AppSnackBar.showError(
@@ -164,7 +158,7 @@ class _CameraScreenState extends State<CameraScreen> {
           ],
         ),
         content: Text(
-          'IncluApp necesita acceso a la cámara para capturar texto. '
+          'LexiEdu necesita acceso a la cámara para capturar texto. '
           'Habilita el permiso en los ajustes del dispositivo.',
           style: Theme.of(ctx).textTheme.bodyMedium,
         ),
@@ -185,8 +179,6 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 
-  // ── Persistencia ──────────────────────────────────────────────────────────
-
   Future<void> _saveReading({
     required String text,
     required String imagePath,
@@ -200,16 +192,14 @@ class _CameraScreenState extends State<CameraScreen> {
         'processingMs': processingMs,
         'createdAt': DateTime.now().toIso8601String(),
       });
-    } catch (_) {
-      // El guardado en historial es secundario; no interrumpimos al usuario.
-    }
+    } catch (_) {}
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('IncluApp'),
+        title: const Text('LexiEdu'),
         actions: [
           IconButton(
             onPressed: () => Navigator.of(context).push(
@@ -248,6 +238,8 @@ class _CameraScreenState extends State<CameraScreen> {
                 ),
                 const SizedBox(height: 16),
               ],
+              const _PuceBadge(),
+              const SizedBox(height: 12),
               const _ButtonDivider(),
               const SizedBox(height: 12),
               ElevatedButton.icon(
@@ -304,7 +296,7 @@ class _AppHero extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'IncluApp',
+                'LexiEdu',
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(height: 4),
@@ -357,6 +349,27 @@ class _FeatureCardsRow extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ── Badge PUCE ────────────────────────────────────────────────────────────────
+
+class _PuceBadge extends StatelessWidget {
+  const _PuceBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return ExcludeSemantics(
+      child: Center(
+        child: Image.asset(
+          'assets/images/puce_logo.png',
+          height: 36,
+          fit: BoxFit.contain,
+          color: AppTheme.disabledGray,
+          colorBlendMode: BlendMode.modulate,
+        ),
       ),
     );
   }
