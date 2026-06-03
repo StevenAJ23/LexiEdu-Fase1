@@ -70,6 +70,7 @@ class _SplashScreenState extends State<SplashScreen>
           child: SlideTransition(
             position: _slide,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Spacer(flex: 2),
 

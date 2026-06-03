@@ -46,11 +46,15 @@ class _CameraScreenState extends State<CameraScreen> {
     final hasPermission = await _ensurePermission(source);
     if (!hasPermission) return;
 
-    final image = await _imagePicker.pickImage(
-      source: source,
-      imageQuality: 92,
-      maxWidth: 1800,
-    );
+    // Para cámara: sin compresión post-captura (evita null en Android).
+    // Para galería: comprimir para reducir tiempo de OCR.
+    final image = source == ImageSource.camera
+        ? await _imagePicker.pickImage(source: source)
+        : await _imagePicker.pickImage(
+            source: source,
+            imageQuality: 92,
+            maxWidth: 1800,
+          );
 
     if (image == null) return;
 
