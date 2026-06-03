@@ -69,12 +69,13 @@ class _SplashScreenState extends State<SplashScreen>
     return Scaffold(
       backgroundColor: AppTheme.primaryBackground,
       body: SafeArea(
-        child: FadeTransition(
-          opacity: _fade,
-          child: SlideTransition(
-            position: _slide,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+        child: SizedBox.expand(
+          child: FadeTransition(
+            opacity: _fade,
+            child: SlideTransition(
+              position: _slide,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Spacer(flex: 2),
 
@@ -176,6 +177,7 @@ class _SplashScreenState extends State<SplashScreen>
               ],
             ),
           ),
+        ),
         ),
       ),
     );
