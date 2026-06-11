@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _ctrl.forward();
 
-    _navTimer = Timer(const Duration(milliseconds: 2800), _navigate);
+    _navTimer = Timer(const Duration(milliseconds: 4000), _navigate);
   }
 
   void _navigate() {
@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Spacer(flex: 2),
+                const Spacer(flex: 1),
 
                 // Logo PUCE
                 ScaleTransition(
@@ -90,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 ),
 
-                const SizedBox(height: 56),
+                const SizedBox(height: 20),
 
                 // Ícono de la app
                 Container(
@@ -135,19 +135,21 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 ),
 
-                const Spacer(flex: 3),
+                const Spacer(flex: 2),
 
-                // Versión + institución
+                // Créditos
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 36),
+                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 20),
                   child: Column(
                     children: [
+                      // Badge versión
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 14, vertical: 5),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: AppTheme.primaryYellow.withValues(alpha: 0.30),
+                            color:
+                                AppTheme.primaryYellow.withValues(alpha: 0.30),
                           ),
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -160,14 +162,57 @@ class _SplashScreenState extends State<SplashScreen>
                           ),
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 8),
+
+                      // Universidad y materia
                       const Text(
-                        'Pontificia Universidad Católica del Ecuador\n'
-                        'Ingeniería en Sistemas · 2026',
+                        'Pontificia Universidad Católica del Ecuador',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: AppTheme.disabledGray,
+                          fontSize: 12,
+                          height: 1.5,
+                        ),
+                      ),
+                      const Text(
+                        'Emprendimiento Tecnológico · 2026',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppTheme.primaryYellow,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+
+                      // Separador
+                      Divider(
+                        color: AppTheme.primaryYellow.withValues(alpha: 0.20),
+                        thickness: 1,
+                        indent: 40,
+                        endIndent: 40,
+                      ),
+                      const SizedBox(height: 8),
+
+                      // Docente
+                      const Text(
+                        'Docente: Francisco Clavijo',
+                        style: TextStyle(
+                          color: AppTheme.accentWhite,
                           fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+
+                      // Desarrolladores
+                      const Text(
+                        'Juan C. Cevallos · Steven A. Rosero\n'
+                        'Kevin D. Cepeda · Victoria Y. Galarza',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppTheme.disabledGray,
+                          fontSize: 12,
                           height: 1.6,
                         ),
                       ),

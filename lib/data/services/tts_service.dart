@@ -99,10 +99,20 @@ class TtsService {
     await _flutterTts.setSpeechRate(_speechRate);
   }
 
+  Future<void> setPitch(double pitch) async {
+    await _ready;
+    await _flutterTts.setPitch(pitch.clamp(0.5, 2.0));
+  }
+
   Future<List<dynamic>> getVoices() async {
     await _ready;
     final voices = await _flutterTts.getVoices;
     return voices is List ? voices : [];
+  }
+
+  Future<void> setVoice(Map<String, String> voice) async {
+    await _ready;
+    await _flutterTts.setVoice(voice);
   }
 
   void dispose() {
