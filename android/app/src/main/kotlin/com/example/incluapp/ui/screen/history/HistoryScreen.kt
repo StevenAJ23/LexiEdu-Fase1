@@ -17,6 +17,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -50,6 +52,7 @@ import java.util.Locale
 
 @Composable
 fun HistoryScreen(
+    auditHash      : String,
     onNavigateBack : () -> Unit,
     onOpenReading  : (readingId: Long) -> Unit
 ) {
@@ -74,7 +77,23 @@ fun HistoryScreen(
 
     Scaffold(
         containerColor = PrimaryBackground,
-        topBar         = { LexiTopBar(title = "Historial", onNavigateBack = onNavigateBack) }
+        topBar = {
+            LexiTopBar(
+                title          = "Historial",
+                onNavigateBack = onNavigateBack,
+                actions = {
+                    AssistChip(
+                        onClick  = {},
+                        label    = { Text("Auditoría: $auditHash", style = MaterialTheme.typography.labelMedium) },
+                        modifier = androidx.compose.ui.Modifier.padding(end = 8.dp),
+                        colors   = AssistChipDefaults.assistChipColors(
+                            containerColor    = PrimaryYellow,
+                            labelColor        = PrimaryBackground
+                        )
+                    )
+                }
+            )
+        }
     ) { padding ->
         Column(modifier = Modifier.fillMaxSize().padding(padding)) {
 

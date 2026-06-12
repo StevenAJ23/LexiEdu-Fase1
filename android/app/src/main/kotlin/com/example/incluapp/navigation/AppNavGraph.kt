@@ -40,7 +40,7 @@ fun AppNavGraph(
                 onNavigateToReader  = { imagePath ->
                     navController.navigate(Reader(imagePath = imagePath))
                 },
-                onNavigateToHistory = { navController.navigate(History) },
+                onNavigateToHistory = { navController.navigate(History(auditHash = "HASH-2026-RDA3")) },
                 onNavigateToHelp    = { navController.navigate(Help) }
             )
         }
@@ -54,8 +54,10 @@ fun AppNavGraph(
             )
         }
 
-        composable<History> {
+        composable<History> { backStackEntry ->
+            val route: History = backStackEntry.toRoute()
             HistoryScreen(
+                auditHash       = route.auditHash,
                 onNavigateBack  = { navController.popBackStack() },
                 onOpenReading   = { readingId ->
                     navController.navigate(Reader(readingId = readingId))

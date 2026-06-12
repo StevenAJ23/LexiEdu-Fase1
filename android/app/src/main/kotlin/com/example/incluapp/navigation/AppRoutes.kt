@@ -21,9 +21,13 @@ data class Reader(
     val imagePath: String = ""
 )
 
-/** Destino: historial de lecturas guardadas en Room. */
+/**
+ * Destino: historial de lecturas guardadas en Room.
+ * @param auditHash  Hash de sesión único generado en la pantalla de origen
+ *                   para auditoría de inmutabilidad.
+ */
 @Serializable
-object History
+data class History(val auditHash: String)
 
 /** Destino: pantalla de ayuda y preguntas frecuentes. */
 @Serializable
